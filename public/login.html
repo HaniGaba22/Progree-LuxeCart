@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | LuxeCart</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .auth-page {
+      min-height: calc(100vh - 85px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .auth-image {
+      background:
+        linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.28)),
+        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&fit=crop")
+        center/cover;
+      display: flex;
+      align-items: end;
+      padding: 65px;
+      color: white;
+    }
+    .auth-image h2 {
+      font: 400 56px 'Playfair Display',serif;
+      line-height: 1.1;
+    }
+    .auth-panel {
+      padding: 70px 12%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .auth-panel h1 {
+      font: 400 45px 'Playfair Display',serif;
+      margin: 15px 0;
+    }
+    .auth-subtitle {
+      color: #77736e;
+      font-size: 14px;
+      margin-bottom: 35px;
+    }
+    .auth-form label {
+      display: block;
+      margin: 20px 0 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #ded9d1;
+      background: white;
+      outline: none;
+      font: inherit;
+    }
+    .auth-form input:focus {
+      border-color: #a58a61;
+    }
+    .auth-submit {
+      width: 100%;
+      padding: 17px;
+      margin-top: 27px;
+      border: none;
+      background: #171717;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .auth-submit:hover {
+      background: #a58a61;
+    }
+    .auth-message {
+      margin-top: 16px;
+      color: #b33d3d;
+      font-size: 13px;
+      min-height: 20px;
+    }
+    .auth-switch {
+      margin-top: 22px;
+      font-size: 13px;
+      color: #77736e;
+    }
+    .auth-switch a {
+      color: #a58a61;
+      font-weight: 700;
+    }
+    @media(max-width:800px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-image { display: none; }
+      .auth-panel { padding: 60px 8%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">
+    COMPLIMENTARY SHIPPING ON ORDERS OVER $150
+  </div>
+
+  <header class="navbar">
+    <a href="/" class="logo">LUXE<span>CART.</span></a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#products">Shop</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="/signup.html">Create Account</a>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-image">
+      <h2>Welcome<br>Back to Luxe.</h2>
+    </div>
+
+    <div class="auth-panel">
+      <p class="eyebrow">YOUR LUXECART ACCOUNT</p>
+      <h1>Sign In</h1>
+      <p class="auth-subtitle">
+        Sign in to enjoy a seamless shopping experience.
+      </p>
+
+      <form id="loginForm" class="auth-form">
+        <label for="email">Email Address</label>
+        <input id="email" type="email"
+               placeholder="you@example.com"
+               autocomplete="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password"
+               placeholder="Enter your password"
+               autocomplete="current-password" required>
+
+        <button type="submit" class="auth-submit">
+          SIGN IN
+        </button>
+
+        <p id="authMessage" class="auth-message" role="alert"></p>
+      </form>
+
+      <p class="auth-switch">
+        New to LuxeCart?
+        <a href="/signup.html">Create an account</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("authMessage");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      message.textContent = "";
+
+      const button = form.querySelector("button");
+      button.disabled = true;
+      button.textContent = "SIGNING IN...";
+
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: "same-origin",
+          body: JSON.stringify({
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Login failed");
+        }
+
+        window.location.href = "/";
+
+      } catch (error) {
+        message.textContent = error.message;
+      } finally {
+        button.disabled = false;
+        button.textContent = "SIGN IN";
+      }
+    });
+  </script>
+</body>
+</html>

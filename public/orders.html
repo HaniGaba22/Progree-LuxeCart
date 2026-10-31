@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | LuxeCart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    .orders-container {
+      max-width: 1150px;
+      margin: 70px auto 110px;
+      padding: 0 25px;
+      min-height: 55vh;
+    }
+
+    .orders-eyebrow {
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: #a58a61;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .orders-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 400;
+      margin: 15px 0;
+      color: #171717;
+    }
+
+    .orders-subtitle {
+      color: #77736e;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .orders-list {
+      display: grid;
+      gap: 25px;
+    }
+
+    .order-card {
+      background: #fff;
+      border: 1px solid #e6e0d7;
+      padding: 30px;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid #e6e0d7;
+    }
+
+    .order-number {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .order-date {
+      font-size: 13px;
+      color: #77736e;
+    }
+
+    .order-status {
+      display: inline-block;
+      padding: 10px 15px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: #f1ede6;
+      color: #8d7046;
+    }
+
+    .order-status.paid {
+      background: #edf6ee;
+      color: #277142;
+    }
+
+    .order-status.pending {
+      background: #fff5df;
+      color: #986b14;
+    }
+
+    .order-items {
+      padding: 18px 0;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 0;
+      font-size: 14px;
+    }
+
+    .order-item-name {
+      font-weight: 600;
+    }
+
+    .order-item-quantity {
+      font-size: 12px;
+      color: #77736e;
+      margin-top: 5px;
+    }
+
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 22px;
+      border-top: 1px solid #e6e0d7;
+    }
+
+    .order-total-label {
+      color: #77736e;
+      font-size: 14px;
+    }
+
+    .order-total-value {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .orders-empty {
+      text-align: center;
+      padding: 65px 25px;
+      background: #fff;
+      border: 1px solid #e6e0d7;
+    }
+
+    .orders-empty h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 34px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .orders-empty p {
+      color: #77736e;
+      margin-bottom: 25px;
+    }
+
+    .shop-button {
+      display: inline-block;
+      background: #171717;
+      color: #fff;
+      padding: 17px 30px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .shop-button:hover {
+      background: #a58a61;
+    }
+
+    .orders-footer {
+      background: #171717;
+      color: #fff;
+      padding: 35px 25px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .orders-footer span {
+      color: #a58a61;
+    }
+
+    @media (max-width: 600px) {
+      .orders-container {
+        margin-top: 40px;
+      }
+
+      .order-card {
+        padding: 20px;
+      }
+
+      .order-number {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="announcement">
+    COMPLIMENTARY SHIPPING ON ORDERS OVER $150
+  </div>
+
+  <header class="navbar">
+    <a href="/" class="logo">
+      LUXE<span>CART.</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#products">Shop</a>
+      <a href="/orders.html">My Orders</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="/" class="shop-link">Back to Store</a>
+    </div>
+  </header>
+
+  <main class="orders-container">
+
+    <p class="orders-eyebrow">
+      YOUR LUXECART ACCOUNT
+    </p>
+
+    <h1 class="orders-title">
+      My Orders
+    </h1>
+
+    <p class="orders-subtitle">
+      Review your purchases and explore your order history.
+    </p>
+
+    <div id="ordersList" class="orders-list">
+      <div class="orders-empty">
+        <h2>Loading your orders...</h2>
+        <p>Please wait while we retrieve your purchases.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="orders-footer">
+    © 2026 <span>LuxeCart.</span>
+    Designed & Developed by Hania Gaba.
+  </footer>
+
+  <script>
+    const ordersList = document.getElementById("ordersList");
+
+    function money(cents) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      }).format(Number(cents || 0) / 100);
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return "Date unavailable";
+
+      const normalized = String(dateString)
+        .replace(" ", "T");
+
+      const date = new Date(
+        normalized.endsWith("Z")
+          ? normalized
+          : normalized + "Z"
+      );
+
+      if (Number.isNaN(date.getTime())) {
+        return String(dateString);
+      }
+
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    function createElement(tag, className, content) {
+      const element = document.createElement(tag);
+
+      if (className) {
+        element.className = className;
+      }
+
+      if (content !== undefined) {
+        element.textContent = content;
+      }
+
+      return element;
+    }
+
+    function showEmpty(title, message) {
+      ordersList.replaceChildren();
+
+      const container = createElement(
+        "div",
+        "orders-empty"
+      );
+
+      const heading = createElement("h2", "", title);
+      const paragraph = createElement("p", "", message);
+
+      const link = createElement(
+        "a",
+        "shop-button",
+        "CONTINUE SHOPPING"
+      );
+
+      link.href = "/";
+
+      container.append(heading, paragraph, link);
+      ordersList.appendChild(container);
+    }
+
+    function renderOrder(order) {
+      const card = createElement("article", "order-card");
+
+      const header = createElement("div", "order-header");
+      const headerInfo = createElement("div");
+
+      headerInfo.append(
+        createElement(
+          "h2",
+          "order-number",
+          `Order #${order.id}`
+        ),
+        createElement(
+          "p",
+          "order-date",
+          `Placed on ${formatDate(order.created_at)}`
+        )
+      );
+
+      const status = createElement(
+        "span",
+        "order-status " +
+          (order.status === "paid" ? "paid" : "pending"),
+        order.status === "paid"
+          ? "Payment Successful"
+          : order.status
+      );
+
+      header.append(headerInfo, status);
+
+      const itemsContainer = createElement(
+        "div",
+        "order-items"
+      );
+
+      for (const item of order.items || []) {
+        const itemRow = createElement(
+          "div",
+          "order-item"
+        );
+
+        const info = createElement("div");
+
+        info.append(
+          createElement(
+            "p",
+            "order-item-name",
+            item.name
+          ),
+          createElement(
+            "p",
+            "order-item-quantity",
+            `Quantity: ${item.quantity}`
+          )
+        );
+
+        const itemTotal = createElement(
+          "strong",
+          "",
+          money(
+            item.unit_price_cents * item.quantity
+          )
+        );
+
+        itemRow.append(info, itemTotal);
+        itemsContainer.appendChild(itemRow);
+      }
+
+      const footer = createElement(
+        "div",
+        "order-footer"
+      );
+
+      footer.append(
+        createElement(
+          "span",
+          "order-total-label",
+          "Order Total"
+        ),
+        createElement(
+          "strong",
+          "order-total-value",
+          money(order.total_cents)
+        )
+      );
+
+      card.append(header, itemsContainer, footer);
+
+      return card;
+    }
+
+    async function loadOrders() {
+      try {
+        const response = await fetch("/api/orders", {
+          credentials: "same-origin"
+        });
+
+        if (response.status === 401) {
+          window.location.href = "/login.html";
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error("Unable to load orders.");
+        }
+
+        const orders = await response.json();
+
+        if (!Array.isArray(orders) || orders.length === 0) {
+          showEmpty(
+            "No orders yet",
+            "Your shopping journey starts here."
+          );
+          return;
+        }
+
+        ordersList.replaceChildren();
+
+        for (const order of orders) {
+          ordersList.appendChild(renderOrder(order));
+        }
+
+      } catch (error) {
+        showEmpty(
+          "Something went wrong",
+          error.message
+        );
+      }
+    }
+
+    loadOrders();
+  </script>
+
+</body>
+</html>

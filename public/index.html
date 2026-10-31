@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeCart | Modern Luxury Fashion</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="announcement">
+    COMPLIMENTARY SHIPPING ON ORDERS OVER $150
+  </div>
+
+  <header class="navbar">
+    <a href="/" class="logo">LUXE<span>CART.</span></a>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#products">Shop</a>
+      <a href="#collections">Collections</a>
+      <a href="#about">Our Story</a>
+      <a href="/orders.html">My Orders</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="/login.html" id="accountLink">Sign In</a>
+      <button id="cartButton" class="cart-button" type="button">
+        Bag (<span id="cartCount">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">THE NEW SEASON EDIT</p>
+        <h1>Style That<br><em>Speaks.</em></h1>
+        <p>
+          Thoughtfully selected essentials for a wardrobe
+          that feels effortlessly yours.
+        </p>
+        <a href="#products" class="primary-button">
+          EXPLORE COLLECTION
+        </a>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1100&auto=format&fit=crop"
+          alt="Contemporary fashion collection"
+        >
+      </div>
+    </section>
+
+    <section class="features">
+      <div>✦ Curated Quality</div>
+      <div>✦ Timeless Design</div>
+      <div>✦ Secure Shopping</div>
+      <div>✦ Effortless Style</div>
+    </section>
+
+    <section class="products-section" id="products">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DISCOVER THE COLLECTION</p>
+          <h2>Shop Our Essentials</h2>
+        </div>
+        <p>Everyday pieces. Exceptional style.</p>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-category="All">All</button>
+        <button class="filter-btn" data-category="Women">Women</button>
+        <button class="filter-btn" data-category="Men">Men</button>
+        <button class="filter-btn" data-category="Accessories">Accessories</button>
+        <button class="filter-btn" data-category="Footwear">Footwear</button>
+      </div>
+
+      <div id="productsGrid" class="products-grid">
+        <p>Loading collection...</p>
+      </div>
+    </section>
+
+    <section class="editorial" id="collections">
+      <div>
+        <p class="eyebrow">THE LUXECART PHILOSOPHY</p>
+        <h2>Less Ordinary.<br>More You.</h2>
+        <p>
+          Discover versatile fashion designed for everyday
+          confidence and timeless appeal.
+        </p>
+        <a href="#products" class="outline-button">
+          SHOP THE EDIT
+        </a>
+      </div>
+    </section>
+
+    <section class="newsletter" id="about">
+      <p class="eyebrow">A BETTER WAY TO SHOP</p>
+      <h2>Elevate Your Everyday.</h2>
+      <p>
+        Explore modern essentials with a seamless,
+        secure shopping experience.
+      </p>
+      <a href="#products" class="primary-button">
+        DISCOVER LUXECART
+      </a>
+    </section>
+  </main>
+
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <aside id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h2>Your Shopping Bag</h2>
+      <button id="closeCart" type="button">✕</button>
+    </div>
+
+    <div id="cartItems" class="cart-items">
+      Your bag is empty.
+    </div>
+
+    <div class="cart-footer">
+      <div class="subtotal">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">$0.00</strong>
+      </div>
+      <p>Shipping and taxes calculated at checkout.</p>
+      <button id="checkoutButton" class="checkout-button">
+        PROCEED TO CHECKOUT
+      </button>
+    </div>
+  </aside>
+
+  <footer>
+    <div>
+      <h2>LUXECART.</h2>
+      <p>Modern essentials. Timeless expression.</p>
+    </div>
+    <p>© 2026 LuxeCart. Designed & Developed by Hania Gaba.</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

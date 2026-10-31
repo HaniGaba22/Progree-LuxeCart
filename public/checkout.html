@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Demo Checkout | LuxeCart</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    .checkout-page {
+      max-width: 1200px;
+      margin: 65px auto 100px;
+      padding: 0 24px;
+    }
+
+    .checkout-heading {
+      margin-bottom: 40px;
+    }
+
+    .checkout-heading h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400;
+      margin: 12px 0;
+    }
+
+    .checkout-heading p {
+      color: #77736e;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: #fff;
+      border: 1px solid #e6e0d7;
+      padding: 35px;
+    }
+
+    .checkout-card h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 25px;
+    }
+
+    .sandbox-label {
+      display: inline-block;
+      background: #f1ede6;
+      color: #8d7046;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      padding: 10px 14px;
+      margin-bottom: 22px;
+    }
+
+    .payment-info {
+      background: #faf8f4;
+      border: 1px solid #e6e0d7;
+      padding: 22px;
+      margin-bottom: 26px;
+      line-height: 1.8;
+      color: #625e59;
+      font-size: 14px;
+    }
+
+    .payment-info strong {
+      color: #171717;
+    }
+
+    .payment-button {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+
+    .payment-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .success-button {
+      background: #171717;
+      color: #fff;
+    }
+
+    .success-button:hover:not(:disabled) {
+      background: #a58a61;
+    }
+
+    .fail-button {
+      background: #fff;
+      color: #171717;
+      border: 1px solid #171717;
+    }
+
+    .checkout-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 0;
+      border-bottom: 1px solid #e6e0d7;
+      font-size: 14px;
+    }
+
+    .checkout-item-name {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .checkout-item-qty {
+      color: #77736e;
+      font-size: 12px;
+    }
+
+    .checkout-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .checkout-note {
+      font-size: 12px;
+      color: #77736e;
+      margin-top: 22px;
+      line-height: 1.7;
+    }
+
+    .checkout-message {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid #e6e0d7;
+      background: #faf8f4;
+      line-height: 1.7;
+      display: none;
+    }
+
+    .checkout-message.show {
+      display: block;
+    }
+
+    .checkout-message.success {
+      border-color: #a7c9ac;
+      background: #f1f8f2;
+    }
+
+    .checkout-message.error {
+      border-color: #e1b5b5;
+      background: #fff5f5;
+    }
+
+    .checkout-message a {
+      color: #8d7046;
+      font-weight: 700;
+    }
+
+    @media (max-width: 800px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="announcement">
+    COMPLIMENTARY SHIPPING ON ORDERS OVER $150
+  </div>
+
+  <header class="navbar">
+    <a href="/" class="logo">LUXE<span>CART.</span></a>
+
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#products">Shop</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="/">Back to Store</a>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <div class="checkout-heading">
+      <p class="eyebrow">YOUR SHOPPING EXPERIENCE</p>
+      <h1>Secure Demo Checkout</h1>
+      <p>
+        Review your order and test the payment process.
+      </p>
+    </div>
+
+    <div class="checkout-layout">
+      <section class="checkout-card">
+        <span class="sandbox-label">
+          EDUCATIONAL PAYMENT SANDBOX
+        </span>
+
+        <h2>Payment Simulation</h2>
+
+        <div class="payment-info">
+          <strong>Demo Mode — No Real Charges</strong>
+          <p>
+            This checkout simulates a payment transaction
+            for the LuxeCart internship project.
+          </p>
+          <p>
+            No credit card or banking information is required.
+          </p>
+        </div>
+
+        <button
+          id="successButton"
+          class="payment-button success-button"
+          disabled
+        >
+          SIMULATE SUCCESSFUL PAYMENT
+        </button>
+
+        <button
+          id="failButton"
+          class="payment-button fail-button"
+          disabled
+        >
+          SIMULATE FAILED PAYMENT
+        </button>
+
+        <div
+          id="checkoutMessage"
+          class="checkout-message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+        <p class="checkout-note">
+          Successful simulation creates an order, updates
+          inventory, and clears your shopping bag.
+          Failed simulation does not create an order.
+        </p>
+      </section>
+
+      <aside class="checkout-card">
+        <h2>Order Summary</h2>
+
+        <div id="orderItems">
+          Loading your shopping bag...
+        </div>
+
+        <div class="checkout-total">
+          <span>Total</span>
+          <span id="orderTotal">$0.00</span>
+        </div>
+
+        <p class="checkout-note">
+          Prices are shown in USD.
+          This is a simulated checkout only.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const successButton =
+      document.getElementById("successButton");
+
+    const failButton =
+      document.getElementById("failButton");
+
+    const orderItems =
+      document.getElementById("orderItems");
+
+    const orderTotal =
+      document.getElementById("orderTotal");
+
+    const checkoutMessage =
+      document.getElementById("checkoutMessage");
+
+    let paymentComplete = false;
+    let isProcessing = false;
+
+    function money(cents) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+      }).format(Number(cents || 0) / 100);
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function showMessage(html, type) {
+      checkoutMessage.innerHTML = html;
+      checkoutMessage.className =
+        "checkout-message show " + type;
+    }
+
+    async function requestAPI(url, options = {}) {
+      const response = await fetch(url, {
+        ...options,
+        credentials: "same-origin",
+        headers: {
+          ...(options.body ? {
+            "Content-Type": "application/json"
+          } : {}),
+          ...options.headers
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const error = new Error(
+          data.error || "Something went wrong."
+        );
+        error.status = response.status;
+        throw error;
+      }
+
+      return data;
+    }
+
+    async function loadCheckout() {
+      try {
+        await requestAPI("/api/me");
+
+        const data = await requestAPI(
+          "/api/demo-checkout",
+          { method: "POST" }
+        );
+
+        orderItems.innerHTML = "";
+
+        data.items.forEach(item => {
+          const row = document.createElement("div");
+          row.className = "checkout-item";
+
+          const details = document.createElement("div");
+
+          const name = document.createElement("p");
+          name.className = "checkout-item-name";
+          name.textContent = item.name;
+
+          const quantity = document.createElement("p");
+          quantity.className = "checkout-item-qty";
+          quantity.textContent =
+            `Quantity: ${item.quantity}`;
+
+          details.append(name, quantity);
+
+          const price = document.createElement("strong");
+          price.textContent = money(
+            item.price_cents * item.quantity
+          );
+
+          row.append(details, price);
+          orderItems.appendChild(row);
+        });
+
+        orderTotal.textContent = money(
+          data.total_cents
+        );
+
+        successButton.disabled = false;
+        failButton.disabled = false;
+
+      } catch (error) {
+        if (error.status === 401) {
+          window.location.href = "/login.html";
+          return;
+        }
+
+        orderItems.textContent = error.message;
+
+        showMessage(
+          `<strong>Unable to start checkout.</strong>
+          <p>${escapeHTML(error.message)}</p>
+          <a href="/">Return to Store</a>`,
+          "error"
+        );
+      }
+    }
+
+    async function simulatePayment(result) {
+      if (isProcessing || paymentComplete) return;
+
+      isProcessing = true;
+
+      successButton.disabled = true;
+      failButton.disabled = true;
+
+      try {
+        const data = await requestAPI(
+          "/api/demo-payment",
+          {
+            method: "POST",
+            body: JSON.stringify({ result })
+          }
+        );
+
+        paymentComplete = true;
+
+        showMessage(
+          `<strong>Payment Simulation Successful!</strong>
+          <p>Order #${Number(data.order.order_id)}
+          has been created successfully.</p>
+          <p>Total: ${money(data.order.total_cents)}</p>
+          <p>Your shopping bag has been cleared
+          and inventory has been updated.</p>
+          <a href="/">Continue Shopping</a>`,
+          "success"
+        );
+
+        orderItems.textContent =
+          "Your order has been placed.";
+
+      } catch (error) {
+        showMessage(
+          `<strong>Payment Simulation Failed</strong>
+          <p>${escapeHTML(error.message)}</p>`,
+          "error"
+        );
+
+      } finally {
+        isProcessing = false;
+
+        if (!paymentComplete) {
+          successButton.disabled = false;
+          failButton.disabled = false;
+        }
+      }
+    }
+
+    successButton.addEventListener("click", () => {
+      simulatePayment("success");
+    });
+
+    failButton.addEventListener("click", () => {
+      simulatePayment("failed");
+    });
+
+    loadCheckout();
+  </script>
+</body>
+</html>
